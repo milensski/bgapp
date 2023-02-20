@@ -1,0 +1,22 @@
+services:
+    web:
+        image: milensski/bgapp-web
+        deploy:
+            replicas: 3
+        ports:
+            - 8080:80
+        volumes:
+            - "/home/vagrant/bgapp/web:/var/www/html:ro"
+        networks:
+            - app-network
+        depends_on:
+            - db
+    db:
+        image: <username>/bgapp-db
+        networks:
+            - app-network
+        environment:
+            MYSQL_ROOT_PASSWORD: "12345"
+networks:
+    app-network:
+
